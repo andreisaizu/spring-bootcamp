@@ -10,23 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/author")
 public class AuthorController {
-    private List<AuthorListItem> authorListItems = List.of(
-            AuthorListItem.builder()
-                    .id(1)
-                    .name("Liviu Rebreanu")
-                    .build(),
-            AuthorListItem.builder()
-                    .id(2)
-                    .name("Mihai Eminescu")
-                    .build(),
-            AuthorListItem.builder()
-                    .id(3)
-                    .name("Ion Creanga")
-                    .build());
 
     private List<AuthorDetails> authorDetails = List.of(
             AuthorDetails.builder()
@@ -47,6 +35,13 @@ public class AuthorController {
                     .yearOfDeath(1889)
                     .name("Ion Creanga")
                     .build());
+
+    private final List<AuthorListItem> authorListItems = authorDetails.stream()
+            .map(detail -> AuthorListItem.builder()
+                    .id(detail.getId())
+                    .name(detail.getName())
+                    .build())
+            .collect(Collectors.toList());
 
     @GetMapping
     public ResponseEntity<List<AuthorListItem>> getAuthors() {
