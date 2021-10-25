@@ -11,20 +11,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
-class AuthorClientTest {
+class AuthorRestTemplateClientTest {
 
     @Autowired
-    AuthorClient authorClient;
+    AuthorRestTemplateClient authorRestTemplateClient;
 
     @Test
     void getAuthors() {
-        AuthorListItem[] teamListItems = authorClient.getAllAuthors();
+        AuthorListItem[] teamListItems = authorRestTemplateClient.getAllAuthors();
         assertTrue(teamListItems.length > 0);
     }
 
     @Test
     void getAuthor() {
-        ResponseEntity<AuthorDetails> responseEntity = authorClient.getAuthor(1);
+        ResponseEntity<AuthorDetails> responseEntity = authorRestTemplateClient.getAuthor(1);
         assertTrue(responseEntity.getStatusCode().is2xxSuccessful());
         assertNotNull(responseEntity.getBody());
 

@@ -22,7 +22,6 @@ import static com.deloittedigital.library.exception.Constants.CATEGORY_NOT_FOUND
 import static com.deloittedigital.library.service.local.LocalCategoryService.categoryList;
 import static java.util.Objects.isNull;
 
-@Profile("local")
 @Service
 public class LocalBookService implements IBookService {
     private final ICategoryService categoryService;

@@ -1,20 +1,5 @@
-
-spring:
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-  datasource:
-    url: "jdbc:postgresql://localhost:5432/librarydb"
-    driverClassName: org.postgresql.Driver
-    username: postgres
-    password: changeme
-  profiles:
-    active: postgres
-
 integration:
   author:
     url:
-      base: http://localhost:8081/author-app/author
-      specific: ${integration.author.url.base}/{authorId}
+      base: http://localhost:9999/author-app/author
+      specific: /{authorId}

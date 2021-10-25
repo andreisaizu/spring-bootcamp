@@ -1,22 +1,15 @@
 package com.deloittedigital.library.model.domain;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
-@Table(name = "books")
 public class Book {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
     private Category category;
 
     @NotNull
@@ -28,30 +21,23 @@ public class Book {
     @NotNull
     private String publisher;
 
-    @Column(length = 50)
     private String language;
 
-    @Column(name = "published_date")
     private LocalDate publishedDate;
 
     private Integer pages;
 
-    @Column(name = "available_copies")
     private Integer availableCopies;
 
-    @Column(name = "nr_copies")
     @NotNull
     private Integer nrCopies;
 
     @NotNull
-    @Column(name = "borrow_days")
     private Integer borrowDays;
 
     @NotNull
-    @Column(length = 13, unique = true)
     private String isbn;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Borrow> borrows = new HashSet<>();
 
     public Long getId() {

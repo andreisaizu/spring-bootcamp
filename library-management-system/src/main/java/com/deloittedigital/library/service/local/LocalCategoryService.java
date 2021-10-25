@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Profile("local")
 public class LocalCategoryService implements ICategoryService {
 
     public static List<Category> categoryList = initCategories();

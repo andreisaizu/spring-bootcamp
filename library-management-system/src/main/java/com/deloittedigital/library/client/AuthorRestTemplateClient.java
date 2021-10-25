@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
-public class AuthorClient {
+public class AuthorRestTemplateClient {
 
     private final AuthorClientConfiguration authorClientConfiguration;
 

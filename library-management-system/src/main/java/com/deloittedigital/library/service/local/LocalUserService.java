@@ -2,10 +2,7 @@ package com.deloittedigital.library.service.local;
 
 import com.deloittedigital.library.exception.EmailAlreadyUsedException;
 import com.deloittedigital.library.model.domain.User;
-import com.deloittedigital.library.repository.UserRepository;
 import com.deloittedigital.library.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Profile("local")
 public class LocalUserService implements IUserService {
 
     private List<User> users = initUsers();
