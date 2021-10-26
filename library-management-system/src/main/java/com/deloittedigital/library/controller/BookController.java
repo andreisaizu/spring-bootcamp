@@ -1,5 +1,6 @@
 package com.deloittedigital.library.controller;
 
+import com.deloittedigital.library.exception.BookNotFoundException;
 import com.deloittedigital.library.model.domain.Book;
 import com.deloittedigital.library.model.dto.BookDTO;
 import com.deloittedigital.library.model.dto.SortFieldDTO;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 import static com.deloittedigital.library.exception.Constants.BOOK_NOT_FOUND;
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/v1/books")
 public class BookController {
 
     @Autowired
@@ -62,9 +63,10 @@ public class BookController {
 
     @GetMapping("/{id}")
     public ResponseEntity<BookDTO> get(@PathVariable("id") Long id) {
-        Book book =  bookService.get(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, BOOK_NOT_FOUND));
-
-        return ResponseEntity.ok(modelMapper.map(book, BookDTO.class));
+        throw  new BookNotFoundException();
+//        Book book =  bookService.get(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, BOOK_NOT_FOUND));
+//
+//        return ResponseEntity.ok(modelMapper.map(book, BookDTO.class));
     }
 
     @GetMapping("/borrowedBy/{userId}")
