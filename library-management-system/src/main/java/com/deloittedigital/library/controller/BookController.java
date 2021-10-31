@@ -45,14 +45,6 @@ public class BookController {
                 .collect(Collectors.toList()));
     }
 
-    @GetMapping("/available")
-    public ResponseEntity<List<BookDTO>> getAllAvailableBooks() {
-        return ResponseEntity.ok(bookService.getAvailableBooks()
-                .stream()
-                .map(book -> modelMapper.map(book, BookDTO.class))
-                .collect(Collectors.toList()));
-    }
-
     @GetMapping("/byCategory/{categoryId}")
     public ResponseEntity<List<BookDTO>> getAllBooksByCategory(@PathVariable("categoryId") Long categoryId) {
         return ResponseEntity.ok(bookService.getAllBooksByCategory(categoryId)
@@ -63,10 +55,9 @@ public class BookController {
 
     @GetMapping("/{id}")
     public ResponseEntity<BookDTO> get(@PathVariable("id") Long id) {
-        throw  new BookNotFoundException();
-//        Book book =  bookService.get(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, BOOK_NOT_FOUND));
-//
-//        return ResponseEntity.ok(modelMapper.map(book, BookDTO.class));
+        Book book =  bookService.get(id).orElseThrow(BookNotFoundException::new);
+
+        return ResponseEntity.ok(modelMapper.map(book, BookDTO.class));
     }
 
     @GetMapping("/borrowedBy/{userId}")
@@ -87,7 +78,7 @@ public class BookController {
 
     @PutMapping("/{id}")
     public ResponseEntity<BookDTO> update(@PathVariable("id") Long id, @RequestBody @Valid BookDTO bookDTO){
-        Book foundBook = bookService.get(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, BOOK_NOT_FOUND));
+        Book foundBook = bookService.get(id).orElseThrow(BookNotFoundException::new);
 
         bookDTO.setId(foundBook.getId());
         Book updatedBook = bookService.update(modelMapper.map(bookDTO, Book.class), foundBook.getCategory());

@@ -15,6 +15,5 @@ public interface IBookService {
     Book update(Book book, Category category);
     void delete(Book book);
     List<Book> getAllBooksBorrowedByUser(Long userId);
-    List<Book> getAvailableBooks();
     List<Book> getAllBooksByCategory(Long categoryId);
 }
