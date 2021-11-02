@@ -37,6 +37,7 @@ public class LocalUserService implements IUserService {
     private static List<User> initUsers() {
         List<User> users = new ArrayList<>();
         User user1 = new User();
+        user1.setId(1L);
         user1.setFirstName("Ioana");
         user1.setLastName("Trandafir");
         user1.setEmail("itrandafir@deloittece.com");
@@ -44,6 +45,7 @@ public class LocalUserService implements IUserService {
         user1.setMobilePhone("+40772305435");
         users.add(user1);
         User user2 = new User();
+        user2.setId(2L);
         user2.setFirstName("Alex");
         user2.setLastName("Petrescu");
         user2.setEmail("apetrescu@deloittece.com");

@@ -2,8 +2,6 @@ package com.deloittedigital.library.model.dto;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 public class CategoryDTO {
 
@@ -15,8 +13,6 @@ public class CategoryDTO {
     private String description;
 
     private LocalDate createdAt;
-
-    private Set<BookDTO> books = new HashSet<>();
 
     public String getName() {
         return name;
@@ -48,13 +44,5 @@ public class CategoryDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Set<BookDTO> getBooks() {
-        return books;
-    }
-
-    public void setBooks(Set<BookDTO> books) {
-        this.books = books;
     }
 }

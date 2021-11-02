@@ -1,5 +1,6 @@
 package com.deloittedigital.library.controller;
 
+import com.deloittedigital.library.exception.CategoryNotFoundException;
 import com.deloittedigital.library.model.domain.Category;
 import com.deloittedigital.library.model.dto.CategoryDTO;
 import com.deloittedigital.library.service.ICategoryService;
@@ -24,7 +25,7 @@ public class CategoryController {
     private final ModelMapper modelMapper = new ModelMapper();
 
     @GetMapping
-    public ResponseEntity<List<CategoryDTO>> getAll(@RequestParam("name") String name) {
+    public ResponseEntity<List<CategoryDTO>> getAll() {
         return ResponseEntity.ok(categoryService.getAll()
                 .stream()
                 .map(category -> modelMapper.map(category, CategoryDTO.class))
@@ -34,7 +35,7 @@ public class CategoryController {
     @GetMapping("/{id}")
     public ResponseEntity<CategoryDTO> get(@PathVariable("id") Long id) {
         Category category =  categoryService.get(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, CATEGORY_NOT_FOUND));
+                .orElseThrow(CategoryNotFoundException::new);
 
         return ResponseEntity.ok(modelMapper.map(category, CategoryDTO.class));
     }
@@ -50,7 +51,7 @@ public class CategoryController {
     @PutMapping("/{id}")
     public ResponseEntity<CategoryDTO> update(@PathVariable("id") Long id, @RequestBody CategoryDTO categoryDTO) {
         Category foundCategory = categoryService.get(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, CATEGORY_NOT_FOUND));
+                .orElseThrow(CategoryNotFoundException::new);
 
         categoryDTO.setId(foundCategory.getId());
         Category updatedCategory = categoryService.update(modelMapper.map(categoryDTO, Category.class));

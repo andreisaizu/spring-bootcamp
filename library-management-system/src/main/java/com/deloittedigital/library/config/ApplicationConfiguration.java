@@ -13,8 +13,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.stream.Collectors;
-
 
 @Configuration
 public class ApplicationConfiguration {
@@ -48,9 +46,6 @@ public class ApplicationConfiguration {
             d.setName(s.getName());
             d.setDescription(s.getDescription());
             d.setCreatedAt(s.getCreatedAt());
-            d.setBooks(s.getBooks().stream()
-                    .map(x -> modelMapper.map(x , Book.class))
-                    .collect(Collectors.toSet()));
             return d;
         };
 

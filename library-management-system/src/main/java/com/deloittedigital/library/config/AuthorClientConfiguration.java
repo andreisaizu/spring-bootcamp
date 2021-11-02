@@ -23,7 +23,7 @@ public class AuthorClientConfiguration {
     }
 
     public String getSpecific() {
-        return specific;
+        return base + specific;
     }
 
 }
